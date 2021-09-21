@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kakebo | {% block titulo_pagina %} {% endblock %}</title>
+    <link rel="stylesheet" href="static/css/flat-remix.css">
+    <link rel="stylesheet" href="static/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet"> 
+  </head>
+  <body>
+    <header>
+      <p>Bienvenid@ a KAK&#x02211;BO</p>
+    </header>
+    <section class="contenedor">
+      <nav>
+        <p> <a href="/">Inicio</a> | <a href="/nuevo">Nuevo</a></p>
+      </nav>
+      {% block contenido_pagina %} {% endblock %}
+    </section>
+    <footer>
+      <p>© 2021 | Todos los derechos reservados</p>
+    </footer>
+  </body>
+</html>
