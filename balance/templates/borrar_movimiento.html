@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block titulo_pagina %} Nuevo movimiento {% endblock %}
+
+{% block contenido_pagina %}
+            <h1>Borrado de movimiento</h1>
+
+            <form action="/borrar/{{id}}" method="post">
+
+                {{ form.hidden_tag() }}
+
+                <div class="campo-formulario">
+                    {{ form.fecha.label() }}
+                    {{ form.fecha.data}}
+                </div>
+
+                <div class="campo-formulario">
+                    {{ form.concepto.label() }}
+                    {{ form.concepto.data }}                    
+                </div>
+
+                <div class="campo-formulario">
+                    <label>Ingreso o Gasto </label>
+                    {% if form.ingreso_gasto == "I" %} Ingreso
+                    {% else %} Gasto
+                    {% endif %}
+                </div>
+
+                <div class="campo-formulario">
+                    {{ form.cantidad.label() }}
+                    {{ form.cantidad.data }}
+                </div>
+
+                {{ form.submit() }}
+ 
+            </form>
+
+{% endblock%}

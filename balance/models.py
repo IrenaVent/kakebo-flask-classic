@@ -4,7 +4,7 @@ class DBManager():
     def __init__(self, ruta_basedatos):
         self.ruta_basedatos = ruta_basedatos
 
-    def consultaSQL (self, consulta):
+    def consultaSQL (self, consulta, params = []):
         # la conexion se abre cuando se abre la consulta
         conn = sqlite3.connect(self.ruta_basedatos)
 
@@ -12,7 +12,7 @@ class DBManager():
         cur = conn.cursor() 
         
         # consulta es pasada desde la instancias en views
-        cur.execute(consulta) 
+        cur.execute(consulta, params) 
 
         # creación de la lista de dicionarios /de lista de [{registro==movimientos}]
         keys = []

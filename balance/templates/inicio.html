@@ -9,6 +9,7 @@
     {% else %}
       <table class = "paper">
         <tr>
+          <th>Id</th>         
           <th>Fecha</th>
           <th>Concepto</th>
           <th>I/G</th>
@@ -16,12 +17,14 @@
         </tr>
         {% for item in items %}
         <tr>
+          <td>{{ item.id }}</td>
           <td>{{ item.fecha }}</td>
           <td>{{ item.concepto }}</td>
           <td>
             {% if item.ingreso_gasto == "I" %} Ingreso {% else %} Gasto {% endif %}
           </td>
           <td>{{ item.cantidad }} €</td>
+          <td><a href="/borrar/{{ item.id }}"class="delete">Borrar</a></td>
         </tr>
         {% endfor %}
       </table>

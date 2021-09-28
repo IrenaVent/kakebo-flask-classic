@@ -2,6 +2,7 @@ from balance import app
 from flask import render_template, request, redirect, url_for, flash
 from balance.models import DBManager
 from balance.forms import MovimientoForm
+from datetime import date
 
 ruta_basedatos = app.config.get("DATABASEPATH")
 
@@ -28,7 +29,7 @@ def nuevo():
         # form es solo el nombre de la variable
         return render_template("nuevo_movimiento.html", form=formulario) 
     else:
-        if formulario.validate():
+        if formulario.validate(): 
             consulta = """ 
                     INSERT INTO movimientos (fecha, concepto, ingreso_gasto, cantidad) 
                     VALUES (:fecha, :concepto, :ingreso_gasto, :cantidad)
@@ -45,9 +46,31 @@ def nuevo():
         else:
             return render_template("nuevo_movimiento.html", form=formulario)
        
-       
 
 # esta ruta es espécifica de flask, llama al registro y lo borra
 @app.route("/borrar/<int:id>", methods=['GET', 'POST'])
 def borrar(id):
-    return f"Página de borrado de {id}"
+    if request.method == "GET":
+
+        consulta = """
+        SELECT id, fecha, concepto, ingreso_gasto, cantidad 
+          FROM movimientos
+        WHERE id = ?;
+    """
+
+        movimientos = dbManager.consultaSQL(consulta,[id])
+        if len(movimientos) == 0:
+            flash(f"Movimiento {id} no encontrado")
+            return redirect(url_for("inicio"))
+
+        el_movimiento = movimientos[0]
+        el_movimiento["fecha"] = date.fromisoformat(el_movimiento["fecha"])
+        formulario = MovimientoForm(data = el_movimiento)
+
+        return render_template("borrar_movimiento.html", form=formulario, id=el_movimiento["id"])
+
+    else: # lo mismo que de la INSERT pero con DELETE. 
+         
+    return "Hola soy un post"
+
+
