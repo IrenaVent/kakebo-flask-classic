@@ -425,7 +425,7 @@ input[type=reset]:active, input[type=reset].active,
 .green-button:active, input.green-button:active, .green-button.active, input.green-button.active,
 .rounded-button:active, .rounded-button.active {
     box-shadow: none;
-    border-color: #F8A488;
+    border-color: #000;
     color: #000;
     text-shadow: none;
     background: #FFF;

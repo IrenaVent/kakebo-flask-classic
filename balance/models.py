@@ -1,5 +1,8 @@
 import sqlite3
 
+
+
+
 class DBManager():
     def __init__(self, ruta_basedatos):
         self.ruta_basedatos = ruta_basedatos

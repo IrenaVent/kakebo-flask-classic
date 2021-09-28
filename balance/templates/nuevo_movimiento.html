@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block titulo_pagina %} Nuevo movimiento {% endblock %}
+
+{% block contenido_pagina %}
+            <h1>Alta de movimiento</h1>
+
+            <form action="/nuevo" method="post">
+                <div class="campo-formulario">
+                    {{ form.fecha.label() }}
+                    {{ form.fecha(type="date") }}
+                </div>
+                <div class="campo-formulario">
+                    {{ form.concepto.label() }}
+                    {{ form.concepto }}
+                </div>
+                <div class="campo-formulario">
+                    {% for subfield in form.ingreso_gasto %}
+                         {{ subfield }} {{ subfield.label }}
+                    {% endfor %}
+                </div>
+                <div class="campo-formulario">
+                    {{ form.cantidad.label() }}
+                    {{ form.cantidad() }}
+                </div>
+
+                {{ form.submit() }}
+ 
+            </form>
+
+{% endblock%}
