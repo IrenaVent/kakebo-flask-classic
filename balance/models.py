@@ -1,8 +1,5 @@
 import sqlite3
 
-
-
-
 class DBManager():
     def __init__(self, ruta_basedatos):
         self.ruta_basedatos = ruta_basedatos
@@ -32,4 +29,13 @@ class DBManager():
             registros.append(d)
 
         conn.close()
-        return registros 
+        return registros
+    
+    def modificaSQL (self, consulta, params):
+        conn = sqlite3.connect(self.ruta_basedatos)
+
+        cur = conn.cursor()
+
+        cur.execute(consulta, params)
+        conn.commit()
+        conn.close()

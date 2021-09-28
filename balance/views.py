@@ -1,5 +1,5 @@
 from balance import app
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 from balance.models import DBManager
 from balance.forms import MovimientoForm
 
@@ -27,19 +27,25 @@ def nuevo():
     if request.method == "GET":
         # form es solo el nombre de la variable
         return render_template("nuevo_movimiento.html", form=formulario) 
-    # else:
-    #     if formulario.validate():
-    #         consulta = """ 
-    #                 INSERT INTO movimiento (fecha, concepto, ingreso_gasto, cantidad) 
-    #                 VALUES (?, ?, ?, ))
-    #             """
+    else:
+        if formulario.validate():
+            consulta = """ 
+                    INSERT INTO movimientos (fecha, concepto, ingreso_gasto, cantidad) 
+                    VALUES (:fecha, :concepto, :ingreso_gasto, :cantidad)
+                """
             
-    #         dbManager
+            try:
+                dbManager.modificaSQL(consulta, formulario.data)
+            except Exception as e:
+                print ("Se ha producido un error de acceso a base de datos", e)
+                flash("Se ha producido un error en la base de datos")
+                return render_template("nuevo_movimiento.html", form=formulario)
 
-    #     """Validar formulario
-    #     si la validación es OK -> redireccionar a inicio
-    #     si la validación es ERROR -> devolver form indicando errores
-    #     preparar plantilla para gestionar erroes"""
+            return redirect(url_for("inicio"))
+        else:
+            return render_template("nuevo_movimiento.html", form=formulario)
+       
+       
 
 # esta ruta es espécifica de flask, llama al registro y lo borra
 @app.route("/borrar/<int:id>", methods=['GET', 'POST'])

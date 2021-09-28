@@ -17,6 +17,13 @@
       <nav>
         <p> <a href="/">Inicio</a> | <a href="/nuevo">Nuevo</a></p>
       </nav>
+
+      {% with mensajes = get_flashed_messages() %}
+          {% for mensaje in mensajes %}
+          <p class="error">{{ mensaje }}</p>
+          {% endfor %}
+      {% endwith %}
+
       {% block contenido_pagina %} {% endblock %}
     </section>
     <footer>
