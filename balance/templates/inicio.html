@@ -15,6 +15,7 @@
           <th>I/G</th>
           <th>Cantidad</th>
           <th></th>
+          <th></th>
         </tr>
         {% for item in items %}
         <!--<tr id={{ item.id }}></tr>-->
@@ -26,6 +27,7 @@
           </td>
           <td>{{ item.cantidad }} €</td>
           <td><a href="/borrar/{{ item.id }}"class="delete">Borrar</a></td>
+          <td><a href="/modificar/{{ item.id }}"class="update">Modificar</a></td>
         </tr>
         {% endfor %}
       </table>

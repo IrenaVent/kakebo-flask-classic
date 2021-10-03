@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block titulo_pagina %} Nuevo movimiento {% endblock %}
+
+{% block contenido_pagina %}
+            <h1>Alta de movimiento</h1>
+
+            <form action="/modificar/{{form.id.data}}" method="post">
+                {{ form.hidden_tag() }}
+
+                <div class="campo-formulario">
+                    {{ form.fecha.label() }}
+                    {{ form.fecha(type="date") }}
+                    {% for error in form.fecha.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor%}
+                </div>
+
+                <div class="campo-formulario">
+                    {{ form.concepto.label() }}
+                    {{ form.concepto }}
+                    {% for error in form.concepto.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor%}                    
+                </div>
+
+                <div class="campo-formulario">
+                    {% for subfield in form.ingreso_gasto %}
+                         {{ subfield }} {{ subfield.label }}
+                    {% endfor %}
+                    {% for error in form.ingreso_gasto.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor%} 
+                </div>
+
+                <div class="campo-formulario">
+                    {{ form.cantidad.label() }}
+                    {{ form.cantidad() }}
+                    {% for error in form.cantidad.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor%}
+                </div>
+
+                {{ form.submit() }}
+ 
+            </form>
+
+{% endblock%}
