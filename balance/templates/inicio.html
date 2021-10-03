@@ -9,15 +9,16 @@
     {% else %}
       <table class = "paper">
         <tr>
-          <th>Id</th>         
+          <!--<th>Id</th>-->        
           <th>Fecha</th>
           <th>Concepto</th>
           <th>I/G</th>
           <th>Cantidad</th>
+          <th></th>
         </tr>
         {% for item in items %}
-        <tr>
-          <td>{{ item.id }}</td>
+        <!--<tr id={{ item.id }}></tr>-->
+          <!--<td>{{ item.id }}</td>-->
           <td>{{ item.fecha }}</td>
           <td>{{ item.concepto }}</td>
           <td>

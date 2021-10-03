@@ -61,16 +61,19 @@ def borrar(id):
         movimientos = dbManager.consultaSQL(consulta,[id])
         if len(movimientos) == 0:
             flash(f"Movimiento {id} no encontrado")
+            # para cambiar de ruta usam redirect
             return redirect(url_for("inicio"))
 
         el_movimiento = movimientos[0]
+        # la fecha del movimiento no es adecuado, esto debe pasar a models / no se debe hacer aquí
         el_movimiento["fecha"] = date.fromisoformat(el_movimiento["fecha"])
         formulario = MovimientoForm(data = el_movimiento)
 
+        # pasamos id para pasar la id a la ruta cd action = "/borrar" en le html
         return render_template("borrar_movimiento.html", form=formulario, id=el_movimiento["id"])
 
     else: # lo mismo que de la INSERT pero con DELETE. 
-         
-    return "Hola soy un post"
+        return "Hola, soy un post"
 
+# también generar botón UPDATE el CRUD completo
 
