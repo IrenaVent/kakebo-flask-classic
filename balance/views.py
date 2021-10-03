@@ -57,7 +57,6 @@ def borrar(id):
           FROM movimientos
         WHERE id = ?;
     """
-
         movimientos = dbManager.consultaSQL(consulta,[id])
         if len(movimientos) == 0:
             flash(f"Movimiento {id} no encontrado")
@@ -72,8 +71,16 @@ def borrar(id):
         # pasamos id para pasar la id a la ruta cd action = "/borrar" en le html
         return render_template("borrar_movimiento.html", form=formulario, id=el_movimiento["id"])
 
-    else: # lo mismo que de la INSERT pero con DELETE. 
-        return "Hola, soy un post"
+    else: 
+        consulta = """
+        DELETE FROM movimientos WHERE id = ?;
+    """
+        try:
+            dbManager.modificaSQL(consulta, [id])
+        except Exception as e:
+            print ("Se ha producido un error de acceso a base de datos", e)
+            flash("Se ha producido un error en la base de datos")        
+            return redirect(url_for("inicio"))
+        return redirect(url_for("inicio"))
 
-# también generar botón UPDATE el CRUD completo
 

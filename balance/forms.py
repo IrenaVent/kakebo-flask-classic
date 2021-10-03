@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import DateField, StringField, FloatField, RadioField, SubmitField
+from wtforms import HiddenField, DateField, StringField, FloatField, RadioField, SubmitField
 from wtforms.validators import DataRequired, Length, NumberRange, ValidationError
 import datetime 
 
@@ -11,6 +11,8 @@ def validar_fecha(formulario, campo):
         raise ValidationError("La fecha no puede ser posterior a hoy - soy externo") 
 
 class MovimientoForm(FlaskForm):
+
+    id = HiddenField()
 
     fecha = DateField("Fecha", validators=[DataRequired(message="Debe informar la fecha"), validar_fecha]) #indicando la instancia de un validator
     # si se pone así el validar_fecha, es porque la función de validar está fuera de la clase

@@ -5,8 +5,7 @@
 {% block contenido_pagina %}
             <h1>Borrado de movimiento</h1>
 
-            <form action="/borrar/{{id.data}}" method="post">
-
+            <form action="/borrar/{{form.id.data}}" method="post">
                 {{ form.hidden_tag() }}
 
                 <div class="campo-formulario">
